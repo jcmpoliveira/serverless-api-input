@@ -48,7 +48,7 @@ curl --request POST 'https://plh0phgg3e.execute-api.eu-west-1.amazonaws.com/v1/r
 This solution consists on the following resources:
 
 - Lambda function - a lambda function that receives a string as an input and returns the same string with certain words replaced
-- API Gateway resource - an API gateway endpoint to expose the lambda
+- API Gateway resource - an API gateway endpoint to expose the lambda with a POST method available
 - S3 Bucket - an S3 Bucket configured as a static website hosting a simple frontend to interact with the API
 
 
