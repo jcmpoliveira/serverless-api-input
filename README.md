@@ -49,7 +49,7 @@ This solution consists on the following resources:
 
 - Lambda function - a lambda function that receives a string as an input and returns the same string with certain words replaced
 - API Gateway resource - an API gateway endpoint to expose the lambda with a POST method available
-- S3 Bucket - an S3 Bucket configured as a static website hosting a simple frontend to interact with the API
+- S3 Bucket - an S3 Bucket configured as a static website, hosting a simple frontend to interact with the API
 
 
 ## Content
@@ -57,7 +57,7 @@ This solution consists on the following resources:
 This project contains source code and supporting files for a serverless application. It includes the following files and folders.
 
 - src - Code for the application's Lambda function.
-- template.yaml - Cloudformation template that define all the resources deployed
+- template.yaml - Cloudformation template that defines all the resources deployed
 - tests - Unit tests for the application code. 
 - website - The html file for the frontend to be stored in an S3 bucket
 - .github/workflows - CI/CD to build and deploy the solution
