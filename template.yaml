@@ -1,0 +1,76 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  
+  Serverless api
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+
+  HttpApiGwApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: v1
+      CorsConfiguration:
+        AllowMethods: 
+          - OPTIONS
+          - POST
+        AllowHeaders: 
+          - Content-Type
+          - X-Amz-Date
+          - Authorization
+          - X-Api-Key
+          - X-Amz-Security-Token
+        AllowOrigins:
+          - "*"
+
+  BackendFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Events:
+        Input:
+          Type: HttpApi
+          Properties:
+            Method: post
+            ApiId: !Ref HttpApiGwApi
+            Path: /replace
+
+  WebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: serverless-api-website-jo-bucket
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+
+  BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      PolicyDocument:
+        Id: MyPolicy
+        Version: 2012-10-17
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource: !Join 
+              - ''
+              - - 'arn:aws:s3:::'
+                - !Ref WebsiteBucket
+                - /*
+      Bucket: !Ref WebsiteBucket
+
+Outputs:
+  ApiEndpoint:
+    Description: "API endpoint"
+    Value: !Sub "https://${HttpApiGwApi}.execute-api.${AWS::Region}.amazonaws.com/v1/replace"
+  BucketUrl:
+    Description: 'S3 Website Url'
+    Value: !GetAtt 'WebsiteBucket.WebsiteURL'

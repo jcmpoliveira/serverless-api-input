@@ -1,0 +1,55 @@
+<html>
+<head>
+      <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<style>
+body {
+      padding-top: 30px;
+      padding-left: 60px;
+}
+</style>
+
+<script type="text/javascript">
+function submitToAPI(e) {
+      e.preventDefault();
+
+      // Replace with API Gateway URL
+      var API_ENDPOINT_URL = "REPLACE_API_ENDPOINT_HERE";
+
+      var message = $("#message-input").val();
+      var data = {
+            input : message
+      };
+
+      $.ajax({
+            type: "POST",
+            url : API_ENDPOINT_URL,
+            dataType: "json",
+            crossDomain: "true",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(data),
+
+            success: function (response) {
+                  $("#output-message").html("<b>Output: </b>" + response.output);
+            },
+
+            error: function () {
+                  alert("UnSuccessfull");
+            }
+      });
+}
+</script>
+</head>
+
+<body>
+      <form id="message-input-form" method="post">
+            <h4>Input:</h4>
+            <input type="text" style="height:35px; width:700px; " id="message-input" placeholder="Enter message here" class="form-control"/><br/>
+            <button type="submit" onClick="submitToAPI(event)" class="btn btn-lg" style="margin-top:20px;">Submit</button>
+      </form>
+      <br />
+      <p id="output-message"><b>Output: </b> </p>
+</body>
+</html>
