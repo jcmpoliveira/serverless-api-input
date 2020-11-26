@@ -2,21 +2,17 @@
 
 ## Usage
 
-The API can be tested in a simple frontend here: http://serverless-api-website-jo-bucket.s3-website-eu-west-1.amazonaws.com
 
-Or
-
-Directly on the API
 
 ```bash
-curl --request POST 'https://plh0phgg3e.execute-api.eu-west-1.amazonaws.com/v1/replace' \
+curl --request POST 'https://<api-gw-endpoint>/v1/replace' \
      --header "Content-Type: application/json" \
      --data '{"input": "This is the string you want to input."}'
 ```
 
 ## Endpoint details
 
-**Endpoint:** https://plh0phgg3e.execute-api.eu-west-1.amazonaws.com/v1/replace
+**Endpoint:** https://<api-gw-endpoint>/v1/replace
 
 **Method:** POST
 
