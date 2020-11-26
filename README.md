@@ -2,21 +2,17 @@
 
 ## Usage
 
-The API can be tested in a simple frontend here: http://serverless-api-website-jo-bucket.s3-website-eu-west-1.amazonaws.com
 
-Or
-
-Directly on the API
 
 ```bash
-curl --request POST 'https://plh0phgg3e.execute-api.eu-west-1.amazonaws.com/v1/replace' \
+curl --request POST 'https://<api-gw-endpoint>/v1/replace' \
      --header "Content-Type: application/json" \
      --data '{"input": "This is the string you want to input."}'
 ```
 
 ## Endpoint details
 
-**Endpoint:** https://plh0phgg3e.execute-api.eu-west-1.amazonaws.com/v1/replace
+**Endpoint:** https://<api-gw-endpoint>/v1/replace
 
 **Method:** POST
 
@@ -48,8 +44,8 @@ curl --request POST 'https://plh0phgg3e.execute-api.eu-west-1.amazonaws.com/v1/r
 This solution consists on the following resources:
 
 - Lambda function - a lambda function that receives a string as an input and returns the same string with certain words replaced
-- API Gateway resource - an API gateway endpoint to expose the lambda
-- S3 Bucket - an S3 Bucket configured as a static website hosting a simple frontend to interact with the API
+- API Gateway resource - an API gateway endpoint to expose the lambda with a POST method available
+- S3 Bucket - an S3 Bucket configured as a static website, hosting a simple frontend to interact with the API
 
 
 ## Content
@@ -57,7 +53,7 @@ This solution consists on the following resources:
 This project contains source code and supporting files for a serverless application. It includes the following files and folders.
 
 - src - Code for the application's Lambda function.
-- template.yaml - Cloudformation template that define all the resources deployed
+- template.yaml - Cloudformation template that defines all the resources deployed
 - tests - Unit tests for the application code. 
 - website - The html file for the frontend to be stored in an S3 bucket
 - .github/workflows - CI/CD to build and deploy the solution
